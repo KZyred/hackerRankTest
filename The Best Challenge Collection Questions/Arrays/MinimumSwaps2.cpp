@@ -35,18 +35,34 @@ out: 3
 out:3
 
  */
+
+/**
+ * Giải thích:
+ * - duyệt từ đầu qua mảng
+ * - cái nào không bằng tại index đó
+ * -> duyệt qua mảng lần nữa để tìm ra số tương ứng index
+ * -> swap số này và số đang đứng ở index không bằng
+ * -> swap++
+ */
 int minimumSwaps(vector<int> arr)
 {
-    int cnt = -1;
+    int swap = 0;
     for (int i = 0; i < arr.size(); i++)
     {
-        if (arr[i] != (i + 1))
+        if (i + 1 != arr[i]) // không bằng
         {
-            swap(arr[i], arr[i] i + 1);
-            cnt++;
+            int t = i;
+            while (arr[t] != i + 1) // tìm ra cái bằng trong mảng
+            {
+                t++;
+            }
+            int temp = arr[t]; // swap
+            arr[t] = arr[i];
+            arr[i] = temp;
+            swap++;
         }
     }
-    return cnt; // ra được số đang không đúng vị trí
+    return swap;
 }
 
 void swap(int &a, int &b)
