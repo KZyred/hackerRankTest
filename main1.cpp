@@ -1,47 +1,25 @@
-#include <iostream>
-template <class T>
-// template <typename T>
+#include <stdio.h>
 
-void custom_add(T val1, T val2)
+struct S
 {
-    std::cout << "Addition = " << (val1 + val2) << std::endl;
-}
-
-// class StudentFee : T
-// {
-// public:
-//     void annualFees()
-//     {
-//         this->fees();
-//     }
-// };
-// class EngStudent
-// {
-// public:
-//     void fees()
-//     {
-//         std::cout << "EngStudent Fees = INR 70,000" << std::endl;
-//     }
-// };
-// class MbaStudent
-// {
-// public:
-//     void fees()
-//     {
-//         std::cout << "MbaStudent Fees = INR 95,000" << std::endl;
-//     }
-// };
+    char a;
+    int b : 5;
+    int c : 11;
+          : 0;
+          int d : 8;
+          struct
+          {
+              int ee : 8;
+              char aa;
+          } e;
+} obj;
 
 int main()
 {
-    // StudentFee<EngStudent> engStudent;
-    // StudentFee<MbaStudent> mbaStudent;
-    // engStudent.annualFees();
-    // mbaStudent.annualFees();
-    int *p = new int(1);
-
-    custom_add<int>(3, 5);              // type specifier <int> present
-    custom_add<float>(3.2, 4.5);        // type specifier <float> present
-    custom_add<double>(3.2123, 4.5456); // type specifier <float> present
+    printf("Size of struct S: %zu bytes\n", sizeof(obj));
+    printf("Address of obj.a: %p\n", (void *)&obj.a);
+    printf("Size of obj.a: %zu bytes\n", sizeof(obj.a));
+    printf("Size of obj.e: %zu bytes\n", sizeof(obj.e));
+    // printf("Size of obj.e.ee: %zu bytes\n", sizeof(obj.e.ee));
     return 0;
 }
