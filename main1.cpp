@@ -1,79 +1,47 @@
 #include <iostream>
-#include <string>
-#include <utility>
-#include <vector>
-using namespace std;
-class A
+template <class T>
+// template <typename T>
+
+void custom_add(T val1, T val2)
 {
-public:
-    std::string s;
-    // khởi tạo mặc định
-    A() : s("test") {}
-    // copy const constructor
-    A(const A &o) : s(o.s) { std::cout << "move failed!\n"; }
+    std::cout << "Addition = " << (val1 + val2) << std::endl;
+}
 
-    // move constructor
-    A(A &&o) : s(std::move(o.s)) {}
-
-    // copy assignment operator
-    A &operator=(const A &other)
-    {
-        s = other.s;
-        std::cout << "copy assigned\n";
-        return *this;
-    }
-
-    // move assignment operator
-    A &operator=(A &&other)
-    {
-        s = std::move(other.s);
-        std::cout << "move assigned\n";
-        return *this;
-    }
-};
-
-A f(A a) { return a; }
-
-class B : public A
-{
-public:
-    std::string s2;
-    int n;
-    // implicit move assignment operator B& B::operator=(B&&)
-    // calls A's move assignment operator
-    // calls s2's move assignment operator
-    // and makes a bitwise copy of n
-};
-
-class C : public B
-{
-public:
-    ~C() {} // destructor prevents implicit move assignment
-};
-
-class D : public B
-{
-public:
-    D() {}
-    ~D() {}                       // destructor would prevent implicit move assignment
-    D &operator=(D &&) = default; // force a move assignment anyway
-};
+// class StudentFee : T
+// {
+// public:
+//     void annualFees()
+//     {
+//         this->fees();
+//     }
+// };
+// class EngStudent
+// {
+// public:
+//     void fees()
+//     {
+//         std::cout << "EngStudent Fees = INR 70,000" << std::endl;
+//     }
+// };
+// class MbaStudent
+// {
+// public:
+//     void fees()
+//     {
+//         std::cout << "MbaStudent Fees = INR 95,000" << std::endl;
+//     }
+// };
 
 int main()
 {
-    std::vector<int> v1 = {1, 2, 3};
-    std::vector<int> v2 = std::move(v1);
+    // StudentFee<EngStudent> engStudent;
+    // StudentFee<MbaStudent> mbaStudent;
+    // engStudent.annualFees();
+    // mbaStudent.annualFees();
+    int *p = new int(1);
 
-    cout << "v1: ";
-    for (int i = 0; i < v1.size(); i++)
-    {
-        cout << v1[i] << " ";
-    }
-    cout << "\n";
-    cout << "v2: ";
-    for (int i = 0; i < v2.size(); i++)
-    {
-        cout << v2[i] << " ";
-    }
-    cout << "\n";
+    custom_add<int>(3, 5);              // type specifier <int> present
+    custom_add<float>(3.2, 4.5);        // type specifier <float> present
+    custom_add<double>(3.2123, 4.5456); // type specifier <float> present
+    return 0;
 }
