@@ -34,43 +34,34 @@ int maximumToys(vector<int> prices, int k)
     // 12 push remain 49 - 12 = 37
     //
 
-    // for (int i = 0; i < prices.size(); i++)
-    // {
-    //     for (int j = 0; j < prices.size() - i - 1; j++)
-    //     {
-    //         if (prices[j] > prices[j + 1])
-    //         {
-    //             int temp = prices[j];
-    //             prices[j] = prices[j + 1];
-    //             prices[j + 1] = temp;
-    //         }
-    //     }
-    // }
-    // int numToys = 0;
-    // for (auto i : prices)
-    // {
-    //     if (k - i < 0)
-    //     {
-    //         break;
-    //     }
-    //     else
-    //     {
-    //         k = k - i;
-    //         numToys++;
-    //     }
-    // }
-    // return numToys;
-
-    vector<int> pricesRemain;
+    // my sort using buddle sort algorithm
+    //  for (int i = 0; i < prices.size(); i++)
+    //  {
+    //      for (int j = 0; j < prices.size() - i - 1; j++)
+    //      {
+    //          if (prices[j] > prices[j + 1])
+    //          {
+    //              int temp = prices[j];
+    //              prices[j] = prices[j + 1];
+    //              prices[j + 1] = temp;
+    //          }
+    //      }
+    //  }
+    sort(prices.begin(), prices.end()); // tối ưu tốt để giảm thời gian
+    int numToys = 0;
     for (auto i : prices)
     {
-        int remainCost = k - i;
-        if (remainCost > 0)
+        if (k - i < 0)
         {
-            pricesRemain.push_back(remainCost);
-            k = remainCost;
+            break;
+        }
+        else
+        {
+            k = k - i;
+            numToys++;
         }
     }
+    return numToys;
 }
 
 int main()
