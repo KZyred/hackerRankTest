@@ -32,6 +32,9 @@ using namespace std;
 //  1. Duyệt từ cuối lên (code ngắn hơn, dễ hơn duyệt từ đầu xuống)
 // => câu hỏi đặt ra:
 // tại sao ko so sánh "arr[i] + sumed[i + 2] và sumed[i + 2]" , mà lại là sumed[i + 1])
+
+// Suy nghĩ: nếu không so sánh với sumed[i + 1]) thì không có sự kế thừa max liên tiếp tới đầu mảng
+// dùng sumed[i + 2]) chỉ đem lại hiệu năng theo định nghĩa mảng
 int maxSubsetSum(vector<int> arr)
 {
     //  2. arr.size() + 2: +2 do bên dưới sử dụng: sumed[i + 2], nghĩa là cần mượn thêm 2 phần tử ngoài mảng
