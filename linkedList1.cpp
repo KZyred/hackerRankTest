@@ -1,62 +1,56 @@
+
 #include <bits/stdc++.h>
+#include <iostream>
+
 using namespace std;
 
-// m1 is to store values with their frequency
-// m2 is to store the count of every frequency
-map<int, int> m1, m2;
+vector<string> split_string(string);
 
-int main()
+long minTime(vector<long> machines, long goal)
 {
-    int q;
-    scanf("%d", &q);
-    int a[q], b[q];
-
-    // array of type of queries
-    for (int i = 0; i < q; i++)
-        scanf("%d", &a[i]);
-
-    // array of values
-    for (int i = 0; i < q; i++)
-        scanf("%d", &b[i]);
-
-    for (int i = 0; i < q; i++)
+    // 1. find max
+    long maxVal = INT_MIN;
+    for (auto i : machines)
     {
-        // insert query
-        if (a[i] == 1)
-        {
-            int k = m1[b[i]];
-            // decrease count of present frequency
-            if (k > 0)
-                m2[k]--;
-            // increase occurence of a number
-            m1[b[i]]++;
-            // increase count of present frequency + 1
-            m2[k + 1]++;
-        }
+        maxVal = max(maxVal, i);
+    }
+    // 2. find day
+    long low = 1;
+    long high = maxVal * goal;
+    // long mid = 0;
 
-        // delete query
-        else if (a[i] == 2)
+    while (low < high)
+    {
+        long items = 0;
+        long mid = (high + low) >> 1;
+        for (auto i : machines)
         {
-            int k = m1[b[i]];
-            if (k > 0)
-            {
-                // decrease occurence of a number
-                m1[b[i]]--;
-                // decrease count of present frequency
-                m2[k]--;
-                // increase count of present frequency - 1
-                if (k - 1 > 0)
-                    m2[k - 1]++;
-            }
+            items += mid / i;
+        }
+        if (items < goal)
+        {
+            low = mid + 1;
         }
         else
         {
-            // true if the count of asked frequency is non-zero
-            if (m2[b[i]] > 0)
-                printf("1\n");
-            else
-                printf("0\n");
+            high = mid;
         }
     }
+    return high;
+}
+
+int main()
+{
+    long n, goal;
+    cin >> n >> goal;
+    vector<long> machines;
+    for (int i = 0; i < n; i++)
+    {
+        long machine;
+        cin >> machine;
+        machines.push_back(machine);
+    }
+    long ans = minTime(machines, goal);
+    cout << ans << "\n";
     return 0;
 }

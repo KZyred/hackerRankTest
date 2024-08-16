@@ -13,13 +13,19 @@
         2
         1
         1
+
     Output:
         3 1 2
         2 1 3
 
  *  Ý tưởng:
-        1.
-            1.1.
+        1. Bài toàn không khó
+            - Cần kiến thức cơ bản về biến đổi:
+                + vector to tree
+                + tree to vector
+                + swap left
+            1.1. Chuyển từ vector<vector> sang Tree
+            1.2. Swap, Tree 2 vector
 
  *  Nhận xét ý tưởng:
    - Ý tưởng:

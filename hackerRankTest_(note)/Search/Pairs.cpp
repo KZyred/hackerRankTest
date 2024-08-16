@@ -3,6 +3,8 @@
     - Cho mảng n phần tử, số nguyên k.
     - Tìm 2 phần tử sao cho hiệu của chúng là số nguyên k.
 
+Chú ý: mỗi phần tử trong mảng là duy nhất.
+
  * Test Case:
         5 2
         1 5 3 4 2
@@ -28,34 +30,6 @@ vector<string> split(const string &);
 
 int pairs(int k, vector<int> arr)
 {
-    // int result = 0;
-    // for (int i = 0; i < arr.size() - 1; i++)
-    // {
-    //     for (int j = i + 1; j < arr.size(); j++)
-    //     {
-    //         if (abs(arr[j] - arr[i]) == k)
-    //         {
-    //             result++;
-    //         }
-    //     }
-    // }
-    // return result;
-
-    // 1 3 2
-    // 3 1 2
-
-    // unordered_map<int, int> arr_map;
-    // int result = 0;
-    // for (auto i : arr)
-    // {
-    //     arr_map[i]++;
-    // }
-    // for (auto i : arr)
-    // {
-    //     arr_map[i + k];
-    //     arr_map[i + k]++;
-    // }
-
     int result = 0;
     unordered_map<int, int> arr_map;
     for (int i = 0; i < arr.size(); i++)
@@ -65,18 +39,13 @@ int pairs(int k, vector<int> arr)
     for (int i = 0; i < arr.size(); i++)
     {
         int complement = k + arr[i];
-        if (arr_map.find(complement) != arr_map.end() && arr_map[complement] != i)
-        {
-            result++;
-            continue;
-        }
-        complement = arr[i] - k;
-        if (arr_map.find(complement) != arr_map.end() && arr_map[complement] != i)
+        if (arr_map.find(complement) != arr_map.end())
         {
             result++;
             continue;
         }
     }
+    return result;
 }
 
 int main()
